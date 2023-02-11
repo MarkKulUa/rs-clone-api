@@ -4,7 +4,7 @@ import global from '../variables';
 const checkRegister = [
   check('email', global.INCORECT_EMAIL).isEmail(),
   check('fullName', global.TYPE_STRING).isString(),
-  check('password', global.PASS_LENGHT).isLength({ min: 6 }),
+  check('password', global.PASS_LENGHT).isLength({ min: 1 }),
 ];
 
 const checkLogin = [  

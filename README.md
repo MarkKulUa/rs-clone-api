@@ -1,5 +1,15 @@
 # rs-clone-api
 Документация по использованию АПИ приложения - **RS-clone**.
+## Установка/настройка
+```
+- npm install
+- npm run build
+- npm run start
+```
+P.s. при ошибке "Port 3000 is already in use" нужно кильнуть процесс (удалить процесс по порту):
+```
+sudo kill -9 $(sudo lsof -t -i:3000)
+```
 
 ## Регистрация/авторизация
 ### Регистрация
@@ -9,7 +19,7 @@
 url: /api/auth/register
 method: POST
 headers: { Content-Type: application/json }
-body: { login, fullName, password }
+body: { email, fullName, password }
 ```
 Ответ с сервера при успешной регистрации:
 ```json
@@ -38,7 +48,7 @@ body: { login, fullName, password }
 ### Авторизация
 Опции запроса для авторизации:
 ```
-url: /api/auth/register
+url: /api/auth/login
 method: POST
 headers: { Content-Type: application/json }
 body: { login, password }
@@ -46,11 +56,12 @@ body: { login, password }
 Ответ при успешной аунтификации:
 ```json
 {
-    "email": "...",
-    "fullName": "...",
-    "data": [ ],
-    "token": "...",
-    "userId": "..."
+  "email": "...",
+  "fullName": "...",
+  "token": "...",
+  "refreshToken": "...",
+  "userId": "63e75c473192dabecf01a8c2",
+  "notifications": []
 }
 ```
 Возможные ошибки:
@@ -102,7 +113,8 @@ body: { refreshToken }
 Где поле `refreshToken` - и является вашим рефреш токеном, и если запрос проходит успешно, то мы получаем новый токен:
 ```json
 {
-    "token": "..."
+  "token": "...",
+  "userId": "63e75c473192dabecf01a8c2"
 }
 ```
 Ошибка неверного рефреш токена:

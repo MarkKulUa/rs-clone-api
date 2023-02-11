@@ -94,12 +94,12 @@ const SignIn = async (req: Request, res: Response) => {
     user.refreshToken = refreshToken;
     user.token = token;
 
-    user.boards = undefined;
+    user.trees = undefined;
 
     return res.json({
       email: user.email,
       fullName: user.fullName,
-      boards: user.boards,
+      trees: user.trees,
       token: user.token,
       refreshToken: user.refreshToken,
       userId: user._id,
