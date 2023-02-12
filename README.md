@@ -6,10 +6,12 @@
 - npm run build
 - npm run start
 ```
-P.s. при ошибке "Port 3000 is already in use" нужно кильнуть процесс (удалить процесс по порту):
+#### P.s. при ошибке "Port 3000 is already in use" нужно кильнуть процесс (удалить процесс по порту):
 ```
 sudo kill -9 $(sudo lsof -t -i:3000)
 ```
+
+#### P.s.s. далее вместо "/:id" имеется ввиду, чтобы подставляли соотв. ИД
 
 ## Регистрация/авторизация
 ### Регистрация
@@ -149,5 +151,53 @@ body: { userId }
 }
 ```
 ## Работа с данными
-## 
-### Создание 
+
+### Получение данных юзера
+
+get-user
+
+### Получение всех юзеров
+```
+url: /api/user/get-users
+method: GET
+headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вместо TOKEN, вставляем код с поля token которое приходит при авторизации
+```
+Успешный ответ:
+
+```json
+[
+  {
+    "trees": [],
+    "notifications": [],
+    "_id": "63e75c473192dabecf01a8c2",
+    "email": "test@test.com",
+    "password": "...",
+    "fullName": "..."
+  }
+]
+```
+
+### Получение юзера
+Вместо `/:id` подставляем id так `/api/user/63e8a0acc22b3da5e96a0a8b` (пример).
+```
+url: /api/user/:id
+method: GET
+headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вместо TOKEN, вставляем код с поля token которое приходит при авторизации
+```
+Успешный ответ:
+
+```json
+{
+  "trees": [],
+  "notifications": [],
+  "_id": "63e75c473192dabecf01a8c2",
+  "email": "...@....com",
+  "fullName": "..."
+}
+```
+Возможные ошибки:
+```json
+{
+    "message": "Can not find user!"
+}
+```

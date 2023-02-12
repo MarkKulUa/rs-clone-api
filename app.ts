@@ -3,7 +3,8 @@ import logger from 'morgan';
 import cors from 'cors';
 import connect from './connect';
 import { HttpException } from './exceptions/HttpExpection';
-import authRouter from './routes/users';
+import authRouter from './routes/auth';
+import usersRouter from './routes/users';
 
 const app: Application = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', authRouter);
+app.use('/api/user', usersRouter);
 
 app.use((req: Request, res: Response) => {
   res.json({

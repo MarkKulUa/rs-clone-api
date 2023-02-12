@@ -9,14 +9,14 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : '';
 
     if (!token) {
       res.status(401).json({ message: global.NOT_AUTHORIZED });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     req.body.user = decoded;
     next();
   } catch (e) {
