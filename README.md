@@ -201,3 +201,45 @@ headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вм
     "message": "Can not find user!"
 }
 ```
+
+
+
+## Работа с нодой/связью юзера
+
+### Создание ноды
+
+Опции запроса для создания:
+```
+url: /api/node
+method: POST
+headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вместо TOKEN, вставляем код с поля token которое приходит при авторизации
+body: { name, parentId, gender, birthday, birthplace, isLife, email, familyStatus, relationType }
+```
+Ответ с сервера при успешном создании:
+```json
+{
+  "_id": "63fa6ee370e9c7aa2ce5de16",
+  "name": "testNode1",
+  "parentId": "63e75c473192dabecf01a8c2",
+  "gender": "male",
+  "birthday": null,
+  "birthplace": null,
+  "isLife": true,
+  "email": "testNode1@test.com",
+  "familyStatus": "married",
+  "relationType": "friend"
+}
+```
+
+Возможные ошибки: <br>
+```json
+{
+    "message": "Can not find parentId!"
+}
+```
+```json
+{
+    "message": "The name can not contain invalid characters!"
+}
+```
+

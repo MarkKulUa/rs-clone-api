@@ -5,6 +5,7 @@ import connect from './connect';
 import { HttpException } from './exceptions/HttpExpection';
 import authRouter from './routes/auth';
 import usersRouter from './routes/users';
+import nodesRouter from './routes/nodes';
 
 const app: Application = express();
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', authRouter);
 app.use('/api/user', usersRouter);
+app.use('/api/node', nodesRouter);
 
 app.use((req: Request, res: Response) => {
   res.json({

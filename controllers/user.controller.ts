@@ -21,7 +21,7 @@ const GetUserData = async (req: Request, res: Response) => {
 
 const GetUsers = async (req: Request, res: Response) => {
   try {
-    const users: IUser[] = await User.find({}, '_id, fullName, email, trees');
+    const users: IUser[] = await User.find();
 
     return res.status(201).json(users);
   } catch (e) {
