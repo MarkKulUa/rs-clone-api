@@ -1,4 +1,5 @@
 import { Schema, model, Types, Document } from 'mongoose';
+import { INode } from './Node';
 
 interface Invite {
   from: string;
@@ -16,6 +17,8 @@ export interface IUser extends Document {
   refreshToken?: string;
   userId?: string;
   _id?: string;
+
+  nodes: INode[];
 }
 
 const UserSchema: Schema = new Schema({

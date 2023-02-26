@@ -1,5 +1,5 @@
-import { IUser } from '../models/User';
 import { Request, Response } from 'express';
+import { IUser } from '../models/User';
 import Node, { INode } from '../models/Node';
 import global from '../variables';
 
@@ -26,7 +26,8 @@ const CreateNode = async (req: Request, res: Response) => {
     if (!parentId) {
       return res.status(400).json({ message: PARENT_ID_NOT_FOUND });
     }
-
+    const { userId } = req.body.user;
+console.log('node.controller userId:', userId)
     const node = await Node
       .create({ name, parentId, gender, birthday, birthplace, isLife, email, familyStatus, relationType })
       // .then( async (node: INode) => {
@@ -184,9 +185,19 @@ const DeleteNode = async (req: Request, res: Response) => {
   }
 };
 
+const GetNodes = async (req: Request, res: Response) => {
+  try {
+    const nodes: INode[] = await Node.find();
+
+    return res.status(201).json(nodes);
+  } catch (e) {
+    return res.status(500).json({ message: RANDOM_ERROR });
+  }
+};
 export default {
   CreateNode,
   GetNode,
   UpdateNode,
   DeleteNode,
+  GetNodes,
 };

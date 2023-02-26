@@ -154,8 +154,6 @@ body: { userId }
 
 ### Получение данных юзера
 
-get-user
-
 ### Получение всех юзеров
 ```
 url: /api/user/get-users
@@ -177,7 +175,31 @@ headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вм
 ]
 ```
 
-### Получение юзера
+### Получение текущего юзера
+```
+url: /api/user
+method: GET
+headers: { Content-Type: application/json, Authorization: Bearer TOKEN } // Вместо TOKEN, вставляем код с поля token которое приходит при авторизации
+```
+Успешный ответ:
+
+```json
+{
+  "trees": [],
+  "notifications": [],
+  "_id": "63e75c473192dabecf01a8c2",
+  "email": "...@....com",
+  "fullName": "..."
+}
+```
+Возможные ошибки:
+```json
+{
+    "message": "Can not find user!"
+}
+```
+
+### Получение другого юзера
 Вместо `/:id` подставляем id так `/api/user/63e8a0acc22b3da5e96a0a8b` (пример).
 ```
 url: /api/user/:id

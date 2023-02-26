@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import User, {IUser} from '../models/User';
+import Node, {INode} from '../models/Node';
 import global from '../variables';
 
 const {
@@ -8,10 +9,22 @@ const {
 
 const GetUserData = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.body.user;
-    const user: IUser = await User.findById(userId);
-    
+    let user: IUser = await User.findById(req.params.id);
     user.password = undefined;
+    user.nodes = await Node.find();
+
+    return res.status(201).json(user);
+  } catch (e) {
+    return res.status(500).json({ message: RANDOM_ERROR });
+  }
+};
+
+const GetUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body.user;
+    let user: IUser = await User.findById(userId);
+    user.password = undefined;
+    user.nodes = await Node.find();//nodes: INode[];
 
     return res.status(201).json(user);
   } catch (e) {
@@ -30,6 +43,7 @@ const GetUsers = async (req: Request, res: Response) => {
 };
 
 export default {
+  GetUser,
   GetUserData,
   GetUsers
 };
