@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "ingines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
